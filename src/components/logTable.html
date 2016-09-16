@@ -1,0 +1,18 @@
+<template>
+  <require from="bootstrap/css/bootstrap.css"></require>
+  <span>${title}</span>
+  <table class="table table-bordered table-condensed table-hover">
+    <thead>
+    <tr>
+      <td>Type</td>
+      <td>Time</td>
+      <td>Details</td>
+    </tr>
+    </thead>
+    <tr repeat.for="log of logs"> <!-- as-element="compose" view='./log_template.html'> -->
+      <td>${log.type}</td>
+      <td>${log.time}</td>
+      <td>Details</td>
+    </tr>
+  </table>
+</template>

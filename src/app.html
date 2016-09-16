@@ -1,6 +1,6 @@
 <template>
-  <h1>${recentLogs.length}</h1>
-  <!--<table>-->
-    <!--<tr repeat.for="log of recentLogs" as-element="compose" view='./log_template.html'>-->
-  <!--</table>-->
+  <require from="./components/logTable">
+  </require>
+
+  <log-table title="Recent logs" logs.bind="recentLogs.logs"></log-table>
 </template>

@@ -51,10 +51,10 @@ switch ($action) {
         //echo var_dump($_SERVER);
         return;
     case "getRecent":
-        $query = "SELECT type,payload,time FROM log LIMIT 25";
+        $query = "SELECT id,type,payload,time FROM log order by time desc LIMIT 25 ";
         break;
     case "getAll":
-        $query = "SELECT type,payload,time FROM log";
+        $query = "SELECT id,type,payload,time FROM log order by time desc";
         break;
     default:
         die("Invalid action");
@@ -69,6 +69,7 @@ if (!$result) {
 
 while ($row = $result->fetch_assoc()) {
     $row_converted = [
+        'id' => $row['id'],
         'type' => $row['type'],
         'time' => $row['time'],
         'payload' => json_decode($row['payload'])
