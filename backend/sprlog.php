@@ -14,5 +14,5 @@ $ret = '';
 if ($url != '') {
     $ret = file_get_contents($url);
 }
-echo $ret;
+echo "hello world";
 ?>
