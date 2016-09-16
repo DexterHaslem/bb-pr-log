@@ -68,7 +68,12 @@ if (!$result) {
 }
 
 while ($row = $result->fetch_assoc()) {
-    $ret[] = $row;
+    $row_converted = [
+        'type' => $row['type'],
+        'time' => $row['time'],
+        'payload' => json_decode($row['payload'])
+    ];
+    $ret[] = $row_converted;
 }
 
 // this thing is insane, we dont need to escape because we will be feeding right into js
