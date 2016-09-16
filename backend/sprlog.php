@@ -9,10 +9,24 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-$url = $_REQUEST['url'];
-$ret = '';
-if ($url != '') {
-    $ret = file_get_contents($url);
+
+//X-Event-Key: pullrequest:rejected
+$type = $_SERVER['X-Event-Key'];
+$entityBody = file_get_contents('php://input');
+
+//echo $entityBody;
+
+$action = $_REQUEST['action'];
+
+switch ($action) {
+    case 'add':
+        break;
+    case 'getRecent':
+        break;
+    case 'getAll':
+        break;
+    default:
+        echo "unknown action";
+        break;
 }
-echo "hello world";
 ?>
