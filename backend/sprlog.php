@@ -7,8 +7,8 @@
  */
 
 header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+header('Content-Type: application/json; charset=utf-8');
 
 $servername = "localhost";
 $username = "rq3";
@@ -68,10 +68,11 @@ if (!$result) {
 }
 
 while ($row = $result->fetch_assoc()) {
-    $ret[] = $row;//json_encode($row);
+    $ret[] = $row;
 }
 
-echo json_encode($ret);
+// this thing is insane, we dont need to escape because we will be feeding right into js
+echo json_encode($ret, JSON_UNESCAPED_SLASHES);
 
 $conn->close();
 ?>
