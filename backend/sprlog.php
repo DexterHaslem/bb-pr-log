@@ -29,26 +29,31 @@ $action = $_REQUEST['action'];
 switch ($action) {
     case "add":
         // PHP server header naming is weird
-        $add_type = $conn->$_SERVER['HTTP_X_EVENT_KEY'];
+        $add_type = $_SERVER['HTTP_X_EVENT_KEY'];
         $add_payload = file_get_contents('php://input');
+
         // this is stupid, convert from json, then back to json to strip crap
         // like newlines etc, makes it nice normalized json in db
-        $add_payload_decoded = json_decode($add_payload, true );
+        $add_payload_decoded = json_decode($add_payload, true);
         $add_payload_converted = json_encode($add_payload_decoded);
         $stmt = $conn->prepare("INSERT INTO log(type, payload) VALUES (?, ?)");
         $stmt->bind_param('ss', $add_type, $add_payload_converted);
-        $stmt->execute();
-        $stmt->close();
+        if ($stmt->execute()) {
+            $stmt->close();
+            echo "added";
+        } else {
+            echo $conn->error;
+        }
+
         $conn->close();
-        echo "added";
         //echo $add_payload_converted;
         //echo var_dump($_SERVER);
         return;
     case "getRecent":
-        $query = "select type,payload,time from log limit 25";
+        $query = "SELECT type,payload,time FROM log LIMIT 25";
         break;
     case "getAll":
-        $query = "select type,payload,time from log";
+        $query = "SELECT type,payload,time FROM log";
         break;
     default:
         die("Invalid action");
@@ -56,7 +61,7 @@ switch ($action) {
 
 $result = $conn->query($query);
 if (!$result) {
-    $message = 'Invalid query: ' . mysql_error() . "\n";
+    $message = 'Invalid query: ' . $conn->error . "\n";
     $message .= 'Whole query: ' . $query;
     die($message);
 }
