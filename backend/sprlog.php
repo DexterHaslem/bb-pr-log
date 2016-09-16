@@ -77,7 +77,10 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // this thing is insane, we dont need to escape because we will be feeding right into js
-echo json_encode($ret, JSON_UNESCAPED_SLASHES);
+$final_ret = [
+    'logs'=> $ret
+];
+echo json_encode($final_ret, JSON_UNESCAPED_SLASHES);
 
 $conn->close();
 ?>
