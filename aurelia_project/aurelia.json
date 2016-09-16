@@ -137,7 +137,9 @@
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
-            "deps": ["jquery"], "exports": "$", "resources": ["css/bootstrap.css", "css/bootstrap-theme.css"]
+            "deps": ["jquery"], "exports": "$", "resources": [
+              "css/bootstrap.css",
+              "css/bootstrap-theme.css"]
           },
           {
             "name": "aurelia-testing",
