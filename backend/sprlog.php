@@ -40,6 +40,7 @@ switch ($action) {
         $stmt->execute();
         $stmt->close();
         $conn->close();
+        echo "added";
         //echo $add_payload_converted;
         //echo var_dump($_SERVER);
         return;
