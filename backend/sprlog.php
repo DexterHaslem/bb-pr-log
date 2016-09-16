@@ -28,7 +28,8 @@ $action = $_REQUEST['action'];
 
 switch ($action) {
     case "add":
-        $add_type = $conn->real_escape_string($_SERVER['X-Event-Key']);
+        // PHP server header naming is weird
+        $add_type = $conn->$_SERVER['HTTP_X_EVENT_KEY'];
         $add_payload = file_get_contents('php://input');
         // this is stupid, convert from json, then back to json to strip crap
         // like newlines etc, makes it nice normalized json in db
@@ -40,6 +41,7 @@ switch ($action) {
         $stmt->close();
         $conn->close();
         //echo $add_payload_converted;
+        //echo var_dump($_SERVER);
         return;
     case "getRecent":
         $query = "select type,payload,time from log limit 25";
