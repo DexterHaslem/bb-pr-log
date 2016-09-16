@@ -34,10 +34,11 @@ switch ($action) {
 
         // this is stupid, convert from json, then back to json to strip crap
         // like newlines etc, makes it nice normalized json in db
-        $add_payload_decoded = json_decode($add_payload, true);
-        $add_payload_converted = json_encode($add_payload_decoded);
+        //$add_payload_decoded = json_decode($add_payload, true);
+        //$add_payload_converted = json_encode($add_payload_decoded);
+        // trust server sends smashed json
         $stmt = $conn->prepare("INSERT INTO log(type, payload) VALUES (?, ?)");
-        $stmt->bind_param('ss', $add_type, $add_payload_converted);
+        $stmt->bind_param('ss', $add_type, $add_payload);
         if ($stmt->execute()) {
             $stmt->close();
             echo "added";
