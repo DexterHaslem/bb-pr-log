@@ -51,8 +51,6 @@ switch ($action) {
         die("Invalid action");
 }
 
-echo "bottom";
-
 $result = $conn->query($query);
 if (!$result) {
     $message = 'Invalid query: ' . mysql_error() . "\n";
@@ -63,6 +61,7 @@ if (!$result) {
 while ($row = $result->fetch_assoc()) {
     $ret[] = $row;//json_encode($row);
 }
+
 echo json_encode($ret);
 
 $conn->close();
