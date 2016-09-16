@@ -1,0 +1,1 @@
+alter table log modify time timestamp default current_timestamp();
