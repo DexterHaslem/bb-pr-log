@@ -27,4 +27,20 @@ export class Api {
           this.recentLogs = R.take(RECENT_COUNT, data.content.logs);
         });
   }
+
+  prettyAction(dbaction){
+    switch (dbaction){
+      case "pullrequest:fulfilled":         return "Merged";
+      case "pullrequest:rejected":          return "Rejected";
+      case "pullrequest:approved":          return "Approval added";
+      case "pullrequest:unapproved":        return "Approval removed";
+      case "pullrequest:updated":           return "Updated";
+      case "pullrequest:comment_created":   return "Comment added";
+      case "pullrequest:comment_updated":   return "Comment updated";
+      case "pullrequest:comment_deleted":   return "Comment deleted";
+      case "pullrequest:created":           return "Created";
+      // TODO: check tasks
+      default:                              return dbaction;
+    }
+  }
 }

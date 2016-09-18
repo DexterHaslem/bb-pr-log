@@ -1,0 +1,15 @@
+<template>
+  <require from="../avatar"></require>
+
+  <style>
+    .content-class {
+     display: flex;
+    }
+  </style>
+
+  <h4>${headerText}</h4>
+  <avatar user.bind="log.payload.actor">
+    <div class="content-class"><span> at ${statusText}</span></div>
+  </avatar>
+
+</template>

@@ -2,7 +2,7 @@
  * Created by Dexter on 9/15/2016.
  */
 
-import {inject} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
 import {Api} from '../../api';
 import * as R from 'ramda';
 
@@ -31,6 +31,23 @@ export class Detail {
       this.setLog(this.api.allLogs, params.id);
     } else {
       this.api.getAll().then(logs => this.setLog(this.api.allLogs, params.id));
+    }
+  }
+
+  @computedFrom("log")
+  get showGenericUpdate() {
+    console.log("showGenericUpdate");
+    if (!this.log) {
+      return false;
+    }
+    console.log(this.log.type);
+    switch (this.log.type) {
+      case "pullrequest:updated":
+      case "pullrequest:fulfilled":
+      case "pullrequest:created":
+      case "pullrequest:rejected":
+        return true;
+      default: return false;
     }
   }
 }

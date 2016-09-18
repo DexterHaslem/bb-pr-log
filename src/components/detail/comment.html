@@ -2,8 +2,9 @@
   <require from="../avatar"></require>
 
   <div>
-    <h3>Comment Added</h3>
+    <h4>Comment Added</h4>
     <avatar user.bind="log.payload.comment.user">
+      <span>at ${log.payload.comment.updated_on}</span>
       <div>
         <div innerhtml="${log.payload.comment.content.html | sanitizeHTML}"></div>
         <span>

@@ -1,15 +1,9 @@
 <template>
+  <require from="../avatar"></require>
   <div>
     <h4>${log.type === 'pullrequest:approved' ? 'Approved' : 'unapproved'}</h4>
-
-    <span>
-      by
-      <a href.bind="log.payload.approval.user.links.html.href">
-        ${log.payload.approval.user.display_name}
-      </a>
-
+    <avatar user.bind="log.payload.approval.user">
       at ${log.payload.approval.date}
-    </span>
-
+    </avatar>
   </div>
 </template>

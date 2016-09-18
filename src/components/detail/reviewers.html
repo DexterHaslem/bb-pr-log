@@ -12,9 +12,13 @@
       margin-right: 15px;
     }
 
+    .reviewer-container {
+      margin: 10px;
+    }
+
   </style>
-  <div class="container-fluid">
-    <span>Reviewers (AT TIME OF THIS ACTION):</span>
+  <div class="reviewer-container">
+    <span>Reviewer status at time of update: <strong>(${approvedCount}/${reviewers.length} approved)</strong></span>
 
     <div class="p-parent">
       <avatar user.bind="p.user" class="p-item" repeat.for="p of reviewers">
