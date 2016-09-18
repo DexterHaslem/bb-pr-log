@@ -8,6 +8,7 @@
       <table class="table table-bordered table-condensed table-hover">
         <thead>
         <tr>
+          <td width="15">ID</td>
           <td width="25">View</td>
           <td>Action</td>
           <td width="150">Update by</td>
@@ -19,7 +20,13 @@
           <td width="200">Time</td>
         </tr>
         </thead>
-        <tr repeat.for="log of logs"> <!-- as-element="compose" view='./log_template.html'> -->
+
+        <tr repeat.for="log of logs"
+            css="background: ${log.id == highlightId ? 'lightgray' : ''}"> <!-- as-element="compose" view='./log_template.html'> -->
+
+          <td>
+            <span>${log.id}</span>
+          </td>
           <td>
             <a route-href="route: detail; params.bind: {id: log.id}">
               <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
@@ -54,9 +61,10 @@
 
           <td>${log.payload.pullrequest.comment_count}</td>
           <td>${log.payload.pullrequest.task_count}</td>
-          <td>${log.time}</td>
+          <td>${toRelative(log.id, log.time)}</td>
         </tr>
       </table>
+      <span>${relativeTime}</span>
     </div>
   </div>
 </template>
