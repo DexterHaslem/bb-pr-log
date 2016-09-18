@@ -10,4 +10,9 @@ export class Comment {
   constructor() {
 
   }
+
+  prettyAction(action){
+    const chunks = action.split("_");
+    return chunks[chunks.length-1];
+  }
 }

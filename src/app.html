@@ -1,5 +1,26 @@
 <template>
-  <router-view>
 
+  <require from="bootstrap/css/bootstrap.css"></require>
+
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">STAMPS PR LOG</a>
+      </div>
+
+      <ul class="nav navbar-nav">
+        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+          <a if.bind="disabledNav(row)">
+            ${row.title}
+          </a>
+          <a if.bind="!disabledNav(row)" href.bind="row.href">
+            ${row.title}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <router-view>
   </router-view>
 </template>

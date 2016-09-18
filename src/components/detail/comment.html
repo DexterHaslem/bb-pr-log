@@ -1,37 +1,18 @@
 <template>
-  <style>
-    .comment-box {
-      display: flex;
-      flex-direction: row;
-    }
-    .comment-box-inner {
-      display: flex;
-      flex-direction: column;
-    }
-    .comment-box-right {
-      margin-left: 10px;
-    }
-  </style>
+  <require from="../avatar"></require>
+
   <div>
-    <h4>Comment ${log.type === 'pullrequest:comment_created' ? 'created' : 'deleted'}</h4>
-    <div class="comment-box">
-      <img src.bind="log.payload.comment.user.links.avatar.href" width="32" height="32">
-      <div class="comment-box-inner">
-        <div class="comment-box-right">
-          <span>
-            <a href.bind="log.payload.comment.user.links.html.href">
-              ${log.payload.comment.user.display_name}
-            </a>
-          </span>
-          <div innerhtml="${log.payload.comment.content.html | sanitizeHTML}"></div>
-          <span>
+    <h3>Comment Added</h3>
+    <avatar user.bind="log.payload.comment.user">
+      <div>
+        <div innerhtml="${log.payload.comment.content.html | sanitizeHTML}"></div>
+        <span>
             <a href.bind="log.payload.comment.links.html.href">Link to comment</a>
             <span if.bind="log.payload.comment.inline">
               (${log.payload.comment.inline.path}:${log.payload.comment.inline.to})
             </span>
-          </span>
-        </div>
+        </span>
       </div>
-    </div>
+    </avatar>
   </div>
 </template>

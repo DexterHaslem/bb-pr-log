@@ -1,0 +1,32 @@
+<template>
+  <style>
+    .av-box {
+      display: flex;
+      flex-direction: row;
+    }
+    .av-box-inner {
+      display: flex;
+      flex-direction: column;
+    }
+    .av-box-right {
+      margin-left: 10px;
+    }
+  </style>
+  <div>
+    <div class="av-box">
+      <img src.bind="user.links.avatar.href" width="32" height="32">
+      <div class="av-box-inner">
+        <div class="av-box-right">
+          <span>
+            <a href.bind="user.links.html.href">
+              ${user.display_name}
+            </a>
+          </span>
+
+          <slot></slot>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -8,14 +8,21 @@ export class App {
     this.router = router;
     config.title = 'PR log';
     config.map([
-      {route: ['', '/'], name: 'home', title: 'home', moduleId: 'components/home', nav: true},
-      {route: 'detail/:id', name: 'detail', title: 'detail', moduleId: 'components/detail/detail', nav: false },
+      {route: ['', '/'], name: 'home', title: 'Recent', moduleId: 'components/home', nav: true},
+      {route: 'detail/:id', href: 'detail', name: 'detail', title: 'Details', moduleId: 'components/detail/detail', nav: true, disabled: true},
+      {route: 'stats', name: 'stats', title: 'Stats', moduleId: 'components/stats/stats', nav: true },
     ]);
 
-    //config.mapUnknownRoutes('app');
+    config.mapUnknownRoutes('components/home');
   }
 
   constructor() {
 
+  }
+
+  disabledNav(navItem) {
+    // this is solely to explicitly disable detail direct nav
+    const ret =  navItem.href == 'detail' || navItem.isActive;
+    return ret;
   }
 }
