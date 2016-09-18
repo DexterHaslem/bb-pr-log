@@ -1,4 +1,5 @@
 <template>
+  <require from="../avatar"></require>
   <style>
     .p-parent {
       display: flex;
@@ -7,8 +8,8 @@
 
     .p-item {
       display: flex;
-      flex-direction: column;
-      margin-right: 50px;
+      flex-direction: row;
+      margin-right: 15px;
     }
 
   </style>
@@ -16,18 +17,10 @@
     <span>Reviewers (AT TIME OF THIS ACTION):</span>
 
     <div class="p-parent">
-      <div class="p-item" repeat.for="p of reviewers">
-        <div>
-          <img src.bind="p.user.links.avatar.href" width="32" height="32">
-          <div if.bind="p.approved" class="glyphicon glyphicon-ok">
-          </div>
+      <avatar user.bind="p.user" class="p-item" repeat.for="p of reviewers">
+        <div if.bind="p.approved" class="glyphicon glyphicon-ok p-item">
         </div>
-        <span>
-          <a href.bind="p.user.links.html.href">
-            ${p.user.display_name}
-          </a>
-        </span>
-      </div>
+      </avatar>
     </div>
   </div>
 
