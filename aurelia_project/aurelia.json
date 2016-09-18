@@ -92,6 +92,7 @@
           "scripts/require.js"
         ],
         "dependencies": [
+          "ramda",
           "aurelia-binding",
           "aurelia-bootstrapper",
           "aurelia-dependency-injection",

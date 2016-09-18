@@ -17,4 +17,15 @@ export class LogTable {
 
   }
 
+  prettyDbAction(dbaction){
+    switch (dbaction){
+      case "pullrequest:fulfilled": return "Merged";
+      case "pullrequest:approved": return "Approval added";
+      case "pullrequest:updated": return "Updated";
+      case "pullrequest:comment_created": return "Comment added";
+      case "pullrequest:created": return "Created";
+      default: return dbaction;
+    }
+  }
+
 }

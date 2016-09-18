@@ -9,7 +9,7 @@ export class App {
     config.title = 'PR log';
     config.map([
       {route: ['', '/'], name: 'home', title: 'home', moduleId: 'components/home', nav: true},
-      {route: 'detail/:id', name: 'detail', title: 'detail', moduleId: 'components/detail', nav: false },
+      {route: 'detail/:id', name: 'detail', title: 'detail', moduleId: 'components/detail/detail', nav: false },
     ]);
 
     //config.mapUnknownRoutes('app');

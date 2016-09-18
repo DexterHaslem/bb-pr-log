@@ -3,17 +3,19 @@
 
   <span></span>
   <div class="container-fluid">
-    <div class="page-header">
-      <h2>${title}</h2>
-    </div>
+    <h4>${title}</h4>
     <div style="width: 95%;">
       <table class="table table-bordered table-condensed table-hover">
         <thead>
         <tr>
           <td width="25">View</td>
-          <td width="50">Type</td>
+          <td>Action</td>
+          <td width="150">Update by</td>
           <td width="10%">Repo</td>
+          <td>Owner</td>
           <td>Title</td>
+          <td># comments</td>
+          <td># tasks</td>
           <td width="200">Time</td>
         </tr>
         </thead>
@@ -23,9 +25,35 @@
               <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
             </a>
           </td>
-          <td>${log.type}</td>
-          <td>Repo</td>
-          <td>${log.payload.pullrequest.title}</td>
+
+          <td>${prettyDbAction(log.type)}</td>
+
+          <td>
+            <a href.bind="log.payload.actor.links.html.href">
+              ${log.payload.actor.display_name}
+            </a>
+          </td>
+
+          <td>
+            <a href.bind="log.payload.repository.links.html.href">
+              ${log.payload.repository.full_name}
+            </a>
+          </td>
+
+          <td>
+            <a href.bind="log.payload.pullrequest.author.links.html.href">
+              ${log.payload.pullrequest.author.display_name}
+            </a>
+          </td>
+
+          <td>
+            <a href.bind="log.payload.pullrequest.links.html.href">
+              ${log.payload.pullrequest.title}
+            </a>
+          </td>
+
+          <td>${log.payload.pullrequest.comment_count}</td>
+          <td>${log.payload.pullrequest.task_count}</td>
           <td>${log.time}</td>
         </tr>
       </table>

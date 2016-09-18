@@ -1,0 +1,14 @@
+<template>
+  <require from="../logTable"></require>
+
+  <div class="container-fluid">
+    <h4>Viewing log ${log.id}</h4>
+    <div>
+      <a route-href="route: home">Home</a>
+    </div>
+
+    <span></span>
+
+    <log-table title="Related logs" logs.bind="relatedLogs"></log-table>
+  </div>
+</template>
