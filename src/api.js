@@ -19,12 +19,6 @@ export class Api {
     this.allLogs = null;
   }
 
-  // getRecent() {
-  //   return this.recentLogs ? Promise.resolve(this.recentLogs) :
-  //   this.http.get(BASE_URL + "action=getRecent")
-  //     .then(data => this.recentLogs = data.content);
-  // }
-
   getAll() {
     return this.allLogs ? Promise.resolve(this.allLogs) :
       this.http.get(BASE_URL + "action=getAll")

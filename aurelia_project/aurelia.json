@@ -93,6 +93,7 @@
         ],
         "dependencies": [
           "ramda",
+          "moment",
           "aurelia-binding",
           "aurelia-bootstrapper",
           "aurelia-dependency-injection",

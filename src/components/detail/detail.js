@@ -20,7 +20,6 @@ export class Detail {
       [R.pipe(R.nthArg(0), R.propEq("id")), R.nthArg(1)]
     );
     const log = findById(logId, logs);//logs.find(l => l.id === logId);
-    console.log(log);
     this.log = log;
     this.relatedLogs = R.filter(l => l.payload.pullrequest.id === log.payload.pullrequest.id, logs);
     //console.log(this.relatedLogs);
@@ -28,6 +27,10 @@ export class Detail {
 
   activate(params) {
     this.params = params;
-    this.setLog(this.api.allLogs, params.id);
+    if (this.api.allLogs) {
+      this.setLog(this.api.allLogs, params.id);
+    } else {
+      this.api.getAll().then(logs => this.setLog(this.api.allLogs, params.id));
+    }
   }
 }

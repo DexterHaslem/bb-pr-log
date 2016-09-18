@@ -1,0 +1,34 @@
+<template>
+  <style>
+    .p-parent {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .p-item {
+      display: flex;
+      flex-direction: column;
+      margin-right: 50px;
+    }
+
+  </style>
+  <div class="container-fluid">
+    <span>Reviewers (AT TIME OF THIS ACTION):</span>
+
+    <div class="p-parent">
+      <div class="p-item" repeat.for="p of reviewers">
+        <div>
+          <img src.bind="p.user.links.avatar.href" width="32" height="32">
+          <div if.bind="p.approved" class="glyphicon glyphicon-ok">
+          </div>
+        </div>
+        <span>
+          <a href.bind="p.user.links.html.href">
+            ${p.user.display_name}
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</template>
