@@ -30,8 +30,8 @@
       <span click.delegate="clearFilter()"><a href="#stats">(Clear filter Selection)</a></span>
     </div>
 
-    <filtered-actions-table user.bind="user" action-filter.bind="actionFilter"
-                              time-period-string.bind="timePeriodString">
+    <filtered-actions-table with.bind="allStats" user.bind="user" action-filter.bind="actionFilter"
+                            time-period-string.bind="timePeriodString">
     </filtered-actions-table>
 
 

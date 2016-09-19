@@ -26,7 +26,7 @@ export class FilteredActionsTable {
   }
 
   // woo you can put anything in parent controllers that changes too
-  @computedFrom("user", "actionFilter", "stats.selectedTimePeriod")
+  @computedFrom("user", "actionFilter", "stats.selectedTimePeriod", "api.allLogs")
   get filteredLogs() {
     //console.log('get filteredLogs');
 
