@@ -12,7 +12,7 @@ export class UserActionsTable {
 
   //@bindable allStats;
 
-  @bindable title;
+  // we set ourselves @bindable title;
 
   @bindable user;
 
@@ -23,17 +23,52 @@ export class UserActionsTable {
     this.stats = stats;
   }
 
-  @computedFrom("user")
+  @computedFrom("user", "actionFilter")
   get userActions() {
-    //console.log("get userActions:",this.stats.filteredLogs);
-    const byUser = log => {
-      // oops: beware this is full log item (log.payload..)
-      //console.log(log);
-      // TODO: actionFilter
-      return log.payload.actor.display_name == this.user;
+
+    //const overlaps = R.pipe(R.intersection, R.complement(R.isEmpty));
+
+    const passesActionFilter = logItem => {
+
+      const filter = this.prettyActionFilter.toLowerCase();
+      console.log("filter = ", filter);
+      if (!filter || filter == 'all') {
+        return true;
+      }
+
+      // overlaps didnt work right here. hmm
+      console.log("filter1");
+      switch (logItem.type) {
+        case "pullrequest:created":
+          return filter === "created";
+        case "pullrequest:approved":
+        case "pullrequest:unapproved":
+          return filter === "approved";
+        case "pullrequest:fulfilled":
+          return filter === "merges";
+        case "pullrequest:comment_created":
+        case "pullrequest:comment_updated":
+        case "pullrequest:comment_deleted":
+          return filter == "comments";
+        case "pullrequest:rejected":
+          return filter == "rejected";
+        default: return false;
+      }
     };
 
+    const byUser = log => {
+      const passesFilter = passesActionFilter(log);
+      console.log("passesActionFilter ", log, " =", passesFilter);
+      return passesFilter && log.payload.actor.display_name == this.user;
+    };
+
+    // oops: beware this is full log item (log.payload..)
     return R.filter(byUser, this.stats.filteredLogs || []);
-    //console.log(this.logsByUser);
+  }
+
+  @computedFrom("actionFilter")
+  get prettyActionFilter() {
+    // lop 'num' off property name. really hacky
+    return this.actionFilter ? this.actionFilter.substr(3) : 'All';
   }
 }

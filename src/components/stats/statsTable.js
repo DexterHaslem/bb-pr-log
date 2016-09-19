@@ -17,8 +17,15 @@ export class StatsTable {
 
   }
 
-  userClicked(row) {
-    console.log('user clicked:', row.user);
+  rowItemClicked(row, field) {
+    //console.log('rowItemClicked:', row.user, field);
+    //this.user = row.user;
     this.user = row.user;
+    if (field != 'user') {
+      this.actionFilter = field;
+    } else {
+      // show me all actions for user
+      this.actionFilter = null;
+    }
   }
 }

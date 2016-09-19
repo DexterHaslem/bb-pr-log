@@ -23,12 +23,14 @@
     <stats-table title="stats ${timePeriodString}"
                  all-stats.bind="allStats"
                  user.two-way="user"
-                  action-filter.two-way="actionFilter">
+                 action-filter.two-way="actionFilter">
     </stats-table>
 
-    <user-actions-table if.bind="user"
-                        title="${actionFilter} Actions for ${user}"
-                        user.bind="user" action-filter.bind="actionFilter">
-    </user-actions-table>
+    <div if.bind="user">
+      <span click.delegate="clearUser()"><a href="#stats">(Clear User Selection)</a></span>
+      <user-actions-table user.bind="user" action-filter.bind="actionFilter">
+      </user-actions-table>
+    </div>
+
   </div>
 </template>

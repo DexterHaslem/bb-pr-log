@@ -33,6 +33,11 @@ export class Stats {
     }
   }
 
+  clearUser() {
+    //console.log("clearUser");
+    this.user = null;
+  }
+
   calculateRowsFrom(logs, timePeriod) {
     // can happen on initial load, dont blow up ramda with it
     if (!logs) {
@@ -117,4 +122,6 @@ export class Stats {
     this.stats.rows = this.calculateRowsFrom(this.api.allLogs, this.selectedTimePeriod);
     return this.stats;
   }
+
+
 }

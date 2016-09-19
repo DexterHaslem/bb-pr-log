@@ -13,13 +13,9 @@
 
         <tr repeat.for="row of allStats.rows" model.bind="row">
           <td repeat.for="col of allStats.columns" model.bind="col">
-
-            <a click.trigger="userClicked(row)">
+            <a click.trigger="rowItemClicked(row, col.field)">
               ${row[col.field]}
             </a>
-            <!--<span if.bind="col = user">-->
-              <!--${row[col.field]}-->
-            <!--</span>-->
           </td>
         </tr>
       </table>
