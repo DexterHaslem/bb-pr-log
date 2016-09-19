@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <h4>${title}</h4>
+    <div class="container-fluid">
+      <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr>
+          <td repeat.for="col of allStats.columns">
+            ${col.title}
+          </td>
+        </tr>
+        </thead>
+
+        <tr repeat.for="row of allStats.rows">
+          <td repeat.for="col of allStats.columns">
+            ${row[col.field]}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</template>

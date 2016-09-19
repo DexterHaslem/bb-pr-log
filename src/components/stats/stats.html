@@ -1,8 +1,15 @@
 <template>
+  <require from="./statsTable"></require>
+  <div class="container-fluid">
+    <h4>stats</h4>
 
-  <div id="container-fluid">
-    <div class="jumbotron">
-      <h1>stats</h1>
-    </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a>Table</a></li>
+      <li role="presentation"><a>Chart</a></li>
+      <!--<li role="presentation"><a href="#">Profile</a></li>-->
+      <!--<li role="presentation"><a href="#">Messages</a></li>-->
+    </ul>
+
+    <stats-table title="all statistics" all-stats.bind="allStats"></stats-table>
   </div>
 </template>
