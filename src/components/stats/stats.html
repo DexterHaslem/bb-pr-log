@@ -1,6 +1,6 @@
 <template>
   <require from="./statsTable"></require>
-  <require from="./userActionsTable"></require>
+  <require from="./filteredActionsTable"></require>
 
   <div class="container-fluid">
     <h4>stats</h4>
@@ -26,11 +26,11 @@
                  action-filter.two-way="actionFilter">
     </stats-table>
 
-    <div if.bind="user">
-      <span click.delegate="clearUser()"><a href="#stats">(Clear User Selection)</a></span>
-      <user-actions-table user.bind="user" action-filter.bind="actionFilter">
-      </user-actions-table>
-    </div>
+    <span click.delegate="clearFilter()"><a href="#stats">(Clear filter Selection)</a></span>
+    <filtered-actions-table user.bind="user" action-filter.bind="actionFilter"
+                              time-period-string.bind="timePeriodString">
+    </filtered-actions-table>
+
 
   </div>
 </template>

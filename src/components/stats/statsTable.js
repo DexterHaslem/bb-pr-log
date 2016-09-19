@@ -17,10 +17,10 @@ export class StatsTable {
 
   }
 
-  rowItemClicked(row, field) {
+  itemClicked(row, field) {
     //console.log('rowItemClicked:', row.user, field);
     //this.user = row.user;
-    this.user = row.user;
+    this.user = row ? row.user : null;
     if (field != 'user') {
       this.actionFilter = field;
     } else {

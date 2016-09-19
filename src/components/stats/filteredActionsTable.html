@@ -2,6 +2,6 @@
   <require from="../logTable"></require>
   <!-- just re use our log table filtered down by user -->
   <div class="container-fluid">
-    <log-table title="${prettyActionFilter} Actions for ${user}" logs.bind="userActions"></log-table>
+    <log-table title="${prettyActionFilter} Actions ${userString} ${timePeriodString}" logs.bind="filteredLogs"></log-table>
   </div>
 </template>

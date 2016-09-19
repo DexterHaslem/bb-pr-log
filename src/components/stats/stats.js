@@ -14,15 +14,11 @@ const TIMEPERIOD_ALL = 'all';
 @inject(Api)
 export class Stats {
 
-  //@bindable user;
-
   constructor(api) {
     this.api = api;
     this.stats = null;
     this.timePeriods = [TIMEPERIOD_DAY, TIMEPERIOD_WEEK, TIMEPERIOD_MONTH, TIMEPERIOD_ALL];
     this.selectedTimePeriod = TIMEPERIOD_WEEK;
-    this.user = '';
-    this.actionFilter = 'All';
   }
 
   // make sure to handle being bookmarked here
@@ -33,9 +29,10 @@ export class Stats {
     }
   }
 
-  clearUser() {
+  clearFilter() {
     //console.log("clearUser");
     this.user = null;
+    this.actionFilter = null;
   }
 
   calculateRowsFrom(logs, timePeriod) {
@@ -122,6 +119,5 @@ export class Stats {
     this.stats.rows = this.calculateRowsFrom(this.api.allLogs, this.selectedTimePeriod);
     return this.stats;
   }
-
 
 }

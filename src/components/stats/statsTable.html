@@ -12,14 +12,16 @@
         <thead>
         <tr>
           <td repeat.for="col of allStats.columns">
-            ${col.title}
+            <div class="table-row-item" click.trigger="itemClicked(null, col.field)">
+              ${col.title}
+            </div>
           </td>
         </tr>
         </thead>
 
         <tr repeat.for="row of allStats.rows" model.bind="row">
           <td repeat.for="col of allStats.columns" model.bind="col">
-            <div class="table-row-item" click.trigger="rowItemClicked(row, col.field)">
+            <div class="table-row-item" click.trigger="itemClicked(row, col.field)">
               <a>
                 ${row[col.field]}
               </a>

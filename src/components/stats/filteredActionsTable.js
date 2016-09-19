@@ -8,7 +8,7 @@ import * as R from "ramda";
 
 //@inject(Api)
 @inject(Stats)
-export class UserActionsTable {
+export class FilteredActionsTable {
 
   //@bindable allStats;
 
@@ -18,15 +18,17 @@ export class UserActionsTable {
 
   @bindable actionFilter;
 
+  @bindable timePeriodString;
+
   constructor(stats) {
     //this.api = api;
     this.stats = stats;
   }
 
-  @computedFrom("user", "actionFilter")
-  get userActions() {
-
-    //const overlaps = R.pipe(R.intersection, R.complement(R.isEmpty));
+  // woo you can put anything in parent controllers that changes too
+  @computedFrom("user", "actionFilter", "stats.selectedTimePeriod")
+  get filteredLogs() {
+    console.log('get filteredLogs');
 
     const passesActionFilter = logItem => {
 
@@ -55,15 +57,19 @@ export class UserActionsTable {
         default: return false;
       }
     };
-
-    const byUser = log => {
-      const passesFilter = passesActionFilter(log);
-      console.log("passesActionFilter ", log, " =", passesFilter);
-      return passesFilter && log.payload.actor.display_name == this.user;
+    const passesUserFilter =  logItem =>  {
+      return !this.user || logItem.payload.actor.display_name == this.user;
     };
+
+    const byUser = log => passesActionFilter(log) && passesUserFilter(log);
 
     // oops: beware this is full log item (log.payload..)
     return R.filter(byUser, this.stats.filteredLogs || []);
+  }
+
+  @computedFrom("user")
+  get userString() {
+    return this.user != null ? "for " + this.user : "for all users";
   }
 
   @computedFrom("actionFilter")
