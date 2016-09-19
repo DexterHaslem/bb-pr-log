@@ -28,18 +28,18 @@ export class FilteredActionsTable {
   // woo you can put anything in parent controllers that changes too
   @computedFrom("user", "actionFilter", "stats.selectedTimePeriod")
   get filteredLogs() {
-    console.log('get filteredLogs');
+    //console.log('get filteredLogs');
 
     const passesActionFilter = logItem => {
 
       const filter = this.prettyActionFilter.toLowerCase();
-      console.log("filter = ", filter);
+      //console.log("filter = ", filter);
       if (!filter || filter == 'all') {
         return true;
       }
 
       // overlaps didnt work right here. hmm
-      console.log("filter1");
+      //console.log("filter1");
       switch (logItem.type) {
         case "pullrequest:created":
           return filter === "created";
