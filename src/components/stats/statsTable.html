@@ -1,4 +1,10 @@
 <template>
+  <style>
+    .table-row-item {
+      margin: 1px;
+      cursor: pointer; cursor: hand;
+    }
+  </style>
   <div>
     <h4>${title}</h4>
     <div class="container-fluid">
@@ -13,9 +19,11 @@
 
         <tr repeat.for="row of allStats.rows" model.bind="row">
           <td repeat.for="col of allStats.columns" model.bind="col">
-            <a click.trigger="rowItemClicked(row, col.field)">
-              ${row[col.field]}
-            </a>
+            <div class="table-row-item" click.trigger="rowItemClicked(row, col.field)">
+              <a>
+                ${row[col.field]}
+              </a>
+            </div>
           </td>
         </tr>
       </table>
