@@ -10,6 +10,14 @@
       <!--<li role="presentation"><a href="#">Messages</a></li>-->
     </ul>
 
+    <label>time period
+      <select value.bind="selectedTimePeriod">
+        <option repeat.for="timeperiod of timePeriods" model.bind="timeperiod">
+          ${timeperiod}
+        </option>
+      </select>
+    </label>
+
     <stats-table title="all statistics" all-stats.bind="allStats"></stats-table>
   </div>
 </template>

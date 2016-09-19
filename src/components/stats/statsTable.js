@@ -10,6 +10,6 @@ export class StatsTable {
   @bindable title;
 
   constructor() {
-    console.log(this);
+
   }
 }
