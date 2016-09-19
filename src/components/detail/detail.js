@@ -21,14 +21,7 @@ export class Detail {
     this.log = log;
   }
 
-  // @computedFrom("log")
-  // get relatedLogs() {
-  //   console.log("get relatedLogs");
-  //   return R.filter(l => l.payload.pullrequest.id === this.log.payload.pullrequest.id, this.api.allLogs || []);
-  // }
-
   activate(params) {
-    console.log("details activate: ", params);
     this.params = params;
     if (this.api.allLogs) {
       this.setLog(this.api.allLogs, params.id);

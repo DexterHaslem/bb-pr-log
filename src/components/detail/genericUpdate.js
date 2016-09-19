@@ -24,4 +24,10 @@ export class GenericUpdate {
   get statusText() {
     return this.log.payload.pullrequest.updated_on;
   }
+
+  @computedFrom("log")
+  get commentText() {
+    const reason = this.log.payload.pullrequest.reason;
+    return reason ? "Reason: " + reason : null;
+  }
 }

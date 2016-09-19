@@ -9,7 +9,10 @@
 
   <h4>${headerText}</h4>
   <avatar user.bind="log.payload.actor">
-    <div class="content-class"><span> at ${statusText}</span></div>
+    <div class="content-class">
+      <span> at ${statusText}</span>
+    </div>
+    <span>${commentText}</span>
   </avatar>
 
 </template>

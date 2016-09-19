@@ -1,7 +1,7 @@
 <template>
   <require from="../avatar"></require>
   <div>
-    <h4>${log.type === 'pullrequest:approved' ? 'Approved' : 'unapproved'}</h4>
+    <h4>${log.type === 'pullrequest:approved' ? 'Approved' : 'Unapproved'}</h4>
     <avatar user.bind="log.payload.approval.user">
       at ${log.payload.approval.date}
     </avatar>
