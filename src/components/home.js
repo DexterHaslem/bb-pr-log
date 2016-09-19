@@ -8,7 +8,6 @@ import {Api} from "../api";
 export class Home {
   constructor(api) {
     this.api = api;
-    console.log("home constructor");
     api.getAll();
   }
 }

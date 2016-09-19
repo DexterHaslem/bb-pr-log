@@ -14,13 +14,10 @@ export class Detail {
   }
 
   setLog(logs, logId) {
-    console.log("set log", logId);
-    const findById = R.converge(
-      R.find,
-      [R.pipe(R.nthArg(0), R.propEq("id")), R.nthArg(1)]
-    );
-    const log = findById(logId, logs);
-    this.relatedLogs = R.filter(l => l.payload.pullrequest.id === log.payload.pullrequest.id, logs);
+    // log id came in a string for some reason. that was fun to find
+    const logIdNum = parseInt(logId);
+    const log = R.find(R.propEq('id', logIdNum), logs);
+    this.relatedLogs = log ? R.filter(l => l.payload.pullrequest.id === log.payload.pullrequest.id, logs) : null;
     this.log = log;
   }
 

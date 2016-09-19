@@ -64,19 +64,9 @@
 
           <td>${log.payload.pullrequest.comment_count}</td>
           <td>${log.payload.pullrequest.task_count}</td>
-          <!-- this doesnt pick up log change correctly, very odd.
-          highlightId is being updated correctly
-          <td>${toRelative(log.id, log.time)}</td>
-          -->
-          <!-- this still isnt right after first update
+
           <td>${log.id === highlightId ? '(this action)' : toRelative(log.id, log.payload.pullrequest.updated_on)}</td>
-          -->
-          <!--<td>-->
-            <!--<span textcontent.bind="toRelative(log.id, log.payload.pullrequest.updated_on, highlightId)"></span>-->
-          <!--</td>-->
-          <td>
-            ${log.payload.pullrequest.updated_on}
-          </td>
+
         </tr>
       </table>
       <div>

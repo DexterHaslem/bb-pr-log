@@ -5,7 +5,8 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import * as R from 'ramda';
 
-const BASE_URL= "http://expressive.tech/sprlog/sprlog.php?";
+//const BASE_URL= "http://expressive.tech/sprlog/sprlog.php?";
+const BASE_URL = "http://api.expressive.tech:8095/";
 const RECENT_COUNT = 15;
 
 @inject(HttpClient)
@@ -21,10 +22,10 @@ export class Api {
 
   getAll() {
     return this.allLogs ? Promise.resolve(this.allLogs) :
-      this.http.get(BASE_URL + "action=getAll")
+      this.http.get(BASE_URL + "logs")
         .then(data => {
-          this.allLogs = data.content.logs;
-          this.recentLogs = R.take(RECENT_COUNT, data.content.logs);
+          this.allLogs = data.content;
+          this.recentLogs = R.take(RECENT_COUNT, this.allLogs);
         });
   }
 

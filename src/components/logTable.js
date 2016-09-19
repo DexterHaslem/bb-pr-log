@@ -24,9 +24,7 @@ export class LogTable {
     this.api = api;
   }
 
-  //@computedFrom(["log", "relativeTime"])
-  toRelative(id, time, hid) {
-    //console.log("torelative");
+  toRelative(id, time) {
 
     if (id === this.highlightId) {
       return "(this action)";
@@ -34,11 +32,10 @@ export class LogTable {
 
     const parsedInTime = moment(time);
     if (!this.momentRelativeTime) {
-      this.momentRelativeTime = moment(this.relativeTime);
+      this.momentRelativeTime = this.relativeTime ? moment(this.relativeTime) : moment();
     }
 
     const dif = parsedInTime.from(this.momentRelativeTime);
-    console.log(dif);
     return dif;
   }
 }
