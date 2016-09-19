@@ -26,7 +26,10 @@
                  action-filter.two-way="actionFilter">
     </stats-table>
 
-    <span click.delegate="clearFilter()"><a href="#stats">(Clear filter Selection)</a></span>
+    <div if.bind="actionFilter || user">
+      <span click.delegate="clearFilter()"><a href="#stats">(Clear filter Selection)</a></span>
+    </div>
+
     <filtered-actions-table user.bind="user" action-filter.bind="actionFilter"
                               time-period-string.bind="timePeriodString">
     </filtered-actions-table>
