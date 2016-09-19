@@ -9,7 +9,16 @@ export class StatsTable {
 
   @bindable title;
 
+  @bindable user;
+
+  @bindable actionFilter;
+
   constructor() {
 
+  }
+
+  userClicked(row) {
+    console.log('user clicked:', row.user);
+    this.user = row.user;
   }
 }

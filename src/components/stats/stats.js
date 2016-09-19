@@ -1,7 +1,7 @@
 /**
  * Created by Dexter on 9/18/2016.
  */
-import {inject, computedFrom} from 'aurelia-framework';
+import {inject, computedFrom, bindable} from 'aurelia-framework';
 import {Api} from '../../api';
 import * as R from 'ramda';
 import moment from "moment";
@@ -13,11 +13,16 @@ const TIMEPERIOD_ALL = 'all';
 
 @inject(Api)
 export class Stats {
+
+  //@bindable user;
+
   constructor(api) {
     this.api = api;
     this.stats = null;
     this.timePeriods = [TIMEPERIOD_DAY, TIMEPERIOD_WEEK, TIMEPERIOD_MONTH, TIMEPERIOD_ALL];
     this.selectedTimePeriod = TIMEPERIOD_WEEK;
+    this.user = '';
+    this.actionFilter = 'All';
   }
 
   // make sure to handle being bookmarked here
@@ -41,17 +46,17 @@ export class Stats {
       case TIMEPERIOD_MONTH:  cutoff = moment().subtract(1, 'months');  break;
     }
 
-
-    const filteredLogs = cutoff ? R.filter(l => moment(l.time).isAfter(cutoff), logs) : logs;
+    this.timePeriodString = cutoff ? cutoff.from(moment()) + " to now" : '(all)';
+    this.filteredLogs = cutoff ? R.filter(l => moment(l.time).isAfter(cutoff), logs) : logs;
     //console.log(filteredLogs);
 
     // map out the data by user before turning into rows
-    const usersData = {};
+    this.usersData = {};
 
-    filteredLogs.forEach(l => {
+    this.filteredLogs.forEach(l => {
       const user = l.payload.actor.display_name;
-      if (!usersData[user]) {
-        usersData[user] = {
+      if (!this.usersData[user]) {
+        this.usersData[user] = {
           numApproved: 0,
           numComments: 0,
           numMerges: 0,
@@ -59,7 +64,8 @@ export class Stats {
           numCreated: 0,
         };
       }
-      const target = usersData[user];
+
+      const target = this.usersData[user];
       switch (l.type) {
         case "pullrequest:fulfilled":         target.numMerges++; break;
         case "pullrequest:rejected":          target.numRejected++; break;
@@ -74,15 +80,15 @@ export class Stats {
     });
 
     // simply stick our user name in the object too
-    const toRow = key => R.merge(usersData[key], {user: key});
-    const ret = R.map(toRow, R.keys(usersData));
+    const toRow = key => R.merge(this.usersData[key], {user: key});
+    const ret = R.map(toRow, R.keys(this.usersData));
     //console.log(ret);
     return ret;
   }
 
   @computedFrom("api.allLogs", "selectedTimePeriod")
   get allStats() {
-    console.log("get allStats");
+    //console.log("get allStats");
     this.stats = {};
     this.stats.columns = [{
       title: "User",

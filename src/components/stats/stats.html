@@ -1,5 +1,7 @@
 <template>
   <require from="./statsTable"></require>
+  <require from="./userActionsTable"></require>
+
   <div class="container-fluid">
     <h4>stats</h4>
 
@@ -18,6 +20,15 @@
       </select>
     </label>
 
-    <stats-table title="all statistics" all-stats.bind="allStats"></stats-table>
+    <stats-table title="stats ${timePeriodString}"
+                 all-stats.bind="allStats"
+                 user.two-way="user"
+                  action-filter.two-way="actionFilter">
+    </stats-table>
+
+    <user-actions-table if.bind="user"
+                        title="${actionFilter} Actions for ${user}"
+                        user.bind="user" action-filter.bind="actionFilter">
+    </user-actions-table>
   </div>
 </template>
