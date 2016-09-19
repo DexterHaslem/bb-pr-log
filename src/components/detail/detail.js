@@ -19,10 +19,8 @@ export class Detail {
       R.find,
       [R.pipe(R.nthArg(0), R.propEq("id")), R.nthArg(1)]
     );
-    const log = findById(logId, logs);//logs.find(l => l.id === logId);
-    console.log(this.relatedLogs);
+    const log = findById(logId, logs);
     this.relatedLogs = R.filter(l => l.payload.pullrequest.id === log.payload.pullrequest.id, logs);
-    console.log(this.relatedLogs);
     this.log = log;
   }
 

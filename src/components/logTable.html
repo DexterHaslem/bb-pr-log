@@ -71,8 +71,11 @@
           <!-- this still isnt right after first update
           <td>${log.id === highlightId ? '(this action)' : toRelative(log.id, log.payload.pullrequest.updated_on)}</td>
           -->
+          <!--<td>-->
+            <!--<span textcontent.bind="toRelative(log.id, log.payload.pullrequest.updated_on, highlightId)"></span>-->
+          <!--</td>-->
           <td>
-            <span textcontent.bind="toRelative(log.id, log.payload.pullrequest.updated_on, highlightId)"></span>
+            ${log.payload.pullrequest.updated_on}
           </td>
         </tr>
       </table>
