@@ -32,7 +32,7 @@
     <reviewers reviewers.bind="log.payload.pullrequest.participants"></reviewers>
 
     <log-table title="Related logs" logs.bind="relatedLogs"
-               relative-time.bind="log.time"
-                highlight-id.bind="log.id"></log-table>
+               relative-time.bind="log.payload.pullrequest.updated_on"
+               highlight-id.bind="log.id"></log-table>
   </div>
 </template>

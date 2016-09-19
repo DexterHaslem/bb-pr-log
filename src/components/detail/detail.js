@@ -14,18 +14,26 @@ export class Detail {
   }
 
   setLog(logs, logId) {
-    //console.log("set log", logs);
+    console.log("set log", logId);
     const findById = R.converge(
       R.find,
       [R.pipe(R.nthArg(0), R.propEq("id")), R.nthArg(1)]
     );
     const log = findById(logId, logs);//logs.find(l => l.id === logId);
-    this.log = log;
+    console.log(this.relatedLogs);
     this.relatedLogs = R.filter(l => l.payload.pullrequest.id === log.payload.pullrequest.id, logs);
-    //console.log(this.relatedLogs);
+    console.log(this.relatedLogs);
+    this.log = log;
   }
 
+  // @computedFrom("log")
+  // get relatedLogs() {
+  //   console.log("get relatedLogs");
+  //   return R.filter(l => l.payload.pullrequest.id === this.log.payload.pullrequest.id, this.api.allLogs || []);
+  // }
+
   activate(params) {
+    console.log("details activate: ", params);
     this.params = params;
     if (this.api.allLogs) {
       this.setLog(this.api.allLogs, params.id);
@@ -36,11 +44,9 @@ export class Detail {
 
   @computedFrom("log")
   get showGenericUpdate() {
-    console.log("showGenericUpdate");
     if (!this.log) {
       return false;
     }
-    console.log(this.log.type);
     switch (this.log.type) {
       case "pullrequest:updated":
       case "pullrequest:fulfilled":

@@ -2,7 +2,7 @@
  * Created by Dexter on 9/15/2016.
  */
 
-import {bindable, inject} from "aurelia-framework";
+import {bindable, inject, computedFrom} from "aurelia-framework";
 import moment from "moment";
 import {Api} from "../api";
 
@@ -14,9 +14,9 @@ export class LogTable {
 
   @bindable title;
 
-  @bindable logs = [];
+  @bindable logs;
 
-  @bindable relativeTime = null;
+  @bindable relativeTime;
 
   @bindable highlightId;
 
@@ -24,21 +24,21 @@ export class LogTable {
     this.api = api;
   }
 
-  toRelative(id, time) {
+  //@computedFrom(["log", "relativeTime"])
+  toRelative(id, time, hid) {
+    //console.log("torelative");
+
     if (id === this.highlightId) {
       return "(this action)";
     }
 
-    if (!this.relativeTime) {
-      return time;
-    } else {
-      const parsedInTime = moment(time);
-      if (!this.momentRelativeTime) {
-        this.momentRelativeTime = moment(this.relativeTime);
-      }
-
-      const dif = parsedInTime.from(this.momentRelativeTime);
-      return dif;
+    const parsedInTime = moment(time);
+    if (!this.momentRelativeTime) {
+      this.momentRelativeTime = moment(this.relativeTime);
     }
+
+    const dif = parsedInTime.from(this.momentRelativeTime);
+    console.log(dif);
+    return dif;
   }
 }
