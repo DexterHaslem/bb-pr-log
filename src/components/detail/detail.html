@@ -37,21 +37,28 @@
       margin-right: 5%;
     }
 
+    .action-area {
+      background: #f5f5f5;
+      padding: 15px;
+    }
+
   </style>
   <div class="container-fluid detail-parent">
+    <h4>Viewing log #${log.id} update for pull request #${log.payload.pullrequest.id} <a href.bind="log.payload.pullrequest.links.html.href">
+      ${log.payload.pullrequest.title}
+    </a></h4>
 
     <div class="top-row">
-      <comment if.bind="log.payload.comment" log.bind="log"></comment>
-      <approval if.bind="log.payload.approval" log.bind="log"></approval>
-      <!--<task if.bind="log.payload.task" log.bind="log"></task>-->
-      <generic-update if.bind="showGenericUpdate" log.bind="log"></generic-update>
-
+      <div class="action-area">
+        <comment if.bind="log.payload.comment" log.bind="log"></comment>
+        <approval if.bind="log.payload.approval" log.bind="log"></approval>
+        <!--<task if.bind="log.payload.task" log.bind="log"></task>-->
+        <generic-update if.bind="showGenericUpdate" log.bind="log"></generic-update>
+      </div>
       <div class="branch-area">
         <branches pull-request.bind="log.payload.pullrequest"></branches>
       </div>
     </div>
-
-    <!--<h4>Viewing log ${log.id}</h4>-->
 
     <reviewers reviewers.bind="log.payload.pullrequest.participants"></reviewers>
 
