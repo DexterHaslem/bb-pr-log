@@ -26,20 +26,20 @@ export class FilteredActionsTable {
   }
 
   // woo you can put anything in parent controllers that changes too
+
   @computedFrom("user", "actionFilter", "stats.selectedTimePeriod", "api.allLogs")
   get filteredLogs() {
-    //console.log('get filteredLogs');
 
     const passesActionFilter = logItem => {
 
       const filter = this.prettyActionFilter.toLowerCase();
-      //console.log("filter = ", filter);
+
       if (!filter || filter == 'all') {
         return true;
       }
 
+      // TODO: clean this up
       // overlaps didnt work right here. hmm
-      //console.log("filter1");
       switch (logItem.type) {
         case "pullrequest:created":
           return filter === "created";
@@ -56,6 +56,7 @@ export class FilteredActionsTable {
           return filter == "rejected";
         default: return false;
       }
+
     };
     const passesUserFilter =  logItem =>  {
       return !this.user || logItem.payload.actor.display_name == this.user;

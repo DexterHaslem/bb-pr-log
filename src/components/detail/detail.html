@@ -6,6 +6,7 @@
   <require from="./task"></require>
   <require from="./reviewers"></require>
   <require from="./genericUpdate"></require>
+  <require from="./branches"></require>
 
   <style>
     .pcontainer {
@@ -19,20 +20,45 @@
     .detail-parent {
       display: flex;
       flex-direction: column;
+      align-items: stretch;
+      align-content:stretch;
+    }
+
+    .branch-area {
+      align-self: flex-end;
+    }
+
+    .top-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      align-content:stretch;
+      margin-right: 5%;
     }
 
   </style>
   <div class="container-fluid detail-parent">
+
+    <div class="top-row">
+      <comment if.bind="log.payload.comment" log.bind="log"></comment>
+      <approval if.bind="log.payload.approval" log.bind="log"></approval>
+      <!--<task if.bind="log.payload.task" log.bind="log"></task>-->
+      <generic-update if.bind="showGenericUpdate" log.bind="log"></generic-update>
+
+      <div class="branch-area">
+        <branches pull-request.bind="log.payload.pullrequest"></branches>
+      </div>
+    </div>
+
     <!--<h4>Viewing log ${log.id}</h4>-->
-    <comment if.bind="log.payload.comment" log.bind="log"></comment>
-    <approval if.bind="log.payload.approval" log.bind="log"></approval>
-    <!--<task if.bind="log.payload.task" log.bind="log"></task>-->
-    <generic-update if.bind="showGenericUpdate" log.bind="log"></generic-update>
 
     <reviewers reviewers.bind="log.payload.pullrequest.participants"></reviewers>
 
     <log-table title="Related logs" logs.bind="relatedLogs"
                relative-time.bind="log.payload.pullrequest.updated_on"
                highlight-id.bind="log.id"></log-table>
+
+
   </div>
 </template>
