@@ -42,7 +42,11 @@
       padding: 15px;
     }
 
+    .description-container {
+      margin: 20px;
+    }
   </style>
+
   <div class="container-fluid detail-parent">
     <h4>Viewing log #${log.id} update for pull request #${log.payload.pullrequest.id} <a href.bind="log.payload.pullrequest.links.html.href">
       ${log.payload.pullrequest.title}
@@ -55,6 +59,8 @@
         <!--<task if.bind="log.payload.task" log.bind="log"></task>-->
         <generic-update if.bind="showGenericUpdate" log.bind="log"></generic-update>
       </div>
+
+      <p class="description-container">${log.payload.pullrequest.description}</p>
       <div class="branch-area">
         <branches pull-request.bind="log.payload.pullrequest"></branches>
       </div>
